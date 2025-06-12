@@ -27,10 +27,12 @@ form.addEventListener("submit", function (e) {
     }
   }).then(response => {
     if (response.ok) {
-      alert("Message sent! I'll get back to you soon.");
+      alert("✅ Message sent! Thank you — I'll get back to you soon.");
       form.reset();
     } else {
-      alert("Oops! Something went wrong.");
+      alert("❌ Oops! Something went wrong. Please try again later.");
     }
+  }).catch(() => {
+    alert("❌ Error: Could not send message. Please check your connection.");
   });
 });
