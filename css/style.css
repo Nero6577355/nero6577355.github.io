@@ -27,23 +27,24 @@
 }
 
 body.dark-mode {
-  --bg-color: #010b14;
-  --text-color: #f0f0f0;
-  --box-color: #1e1e1e;
-  --social-bg: #031321;
-  --header-bg: #01070d;
-  --header-text: #f0f0f0;
-  --nav-link-color: #f0f0f0;
-  --nav-link-hover: #4da3ff;
-  --accent-color: #4da3ff;
-  --card-bg: #1e1e1e;
-  --text-muted: #aaa;
-  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    --border-color: #3399ff;
-     --button-bg: #3399ff;
-  --button-text: #fff;
-    --image-shadow:  0 2px 8px rgba(0, 0, 0, 0.4);
-    --color: #74b9ff;
+  --bg-color: #0b1a1f;               /* dark teal navy */
+  --text-color: #e0f7fa; 
+   --primary-color: #00bcd4;             /* pale cyan text */
+  --box-color: #102328;
+  --social-bg: #152c33;
+  --header-bg: #0b1a1f;
+  --header-text: #e0f7fa;
+  --nav-link-color: #e0f7fa;
+  --nav-link-hover: #00e5ff;         /* neon cyan */
+  --accent-color: #00e5ff;
+  --card-bg: #102328;
+  --text-muted: #80deea;
+  --card-shadow: 0 2px 8px rgba(0, 229, 255, 0.1);
+  --border-color: #00acc1;
+  --button-bg: #00bcd4;
+  --button-text: #002f34;
+  --image-shadow: 0 2px 8px rgba(0, 229, 255, 0.2);
+  --color: #26c6da;
 }
 
 body.gradient-mode {
@@ -67,6 +68,53 @@ body.gradient-mode {
   --image-shadow:  0 2px 8px rgba(255, 153, 255, 0.2);
    --color: #e67ef6;
 }
+
+body.green-mode {
+  --bg-color: #1a1a1f;
+  --primary-color: #44ff99; /* Deeper mint green */
+  --text-color: #fce4ec; /* Soft pinkish white */
+  --box-color: #26232a;
+  --social-bg: #2a202b;
+  --header-bg: #1d1b1f;
+  --header-text: #f8b6c8; /* Muted pink */
+  --nav-link-color: #f8b6c8;
+  --nav-link-hover: #44ffaa; /* Aqua-green accent */
+  --accent-color: #44ffaa;
+  --card-bg: #26232a;
+  --text-muted: #c48b9f;
+  --card-shadow: 0 2px 8px rgba(255, 105, 180, 0.2); /* hot pink glow */
+  --button-bg: #44ffaa;
+  --button-text: #1a1a1f;
+  --button-border: #f8b6c8;
+  --border-color: #44ffaa;
+  --image-shadow: 0 2px 8px rgba(255, 105, 180, 0.2);
+  --color: #ffb6c1;
+  background: linear-gradient(135deg, #223d36, #4b1d3f);
+}
+
+body.sunset-mode {
+  --bg-color: #2b1a17;
+  --primary-color: #ff6f3c; /* Vibrant orange */
+  --text-color: #fff0e0; /* Soft creamy white */
+  --box-color: #3c2623;
+  --social-bg: #442d2a;
+  --header-bg: #2e1b18;
+  --header-text: #ffc9a9; /* Peachy accent */
+  --nav-link-color: #ffc9a9;
+  --nav-link-hover: #ff944d; /* Bright warm orange */
+  --accent-color: #ff944d;
+  --card-bg: #3c2623;
+  --text-muted: #e0a899;
+  --card-shadow: 0 2px 8px rgba(255, 140, 100, 0.2);
+  --button-bg: #ff944d;
+  --button-text: #2b1a17;
+  --button-border: #ffc9a9;
+  --border-color: #ff944d;
+  --image-shadow: 0 2px 8px rgba(255, 140, 100, 0.2);
+  --color: #ffae7f;
+  background: linear-gradient(135deg, #3b1f1f, #ff6f3c);
+}
+
 
 header.top-nav,
 footer.site-footer {
