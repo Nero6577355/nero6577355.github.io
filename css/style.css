@@ -1,7 +1,7 @@
 /* =========================
    Root Variables
 ========================= */
-:root {
+body.light-mode {
   --bg-color: #f5f3ee;
   --text-color: #222222;
   --primary-color: #007bff;
@@ -15,11 +15,23 @@
   --card-bg: #f5f5f5;
   --text-muted: gray;
   --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-   --border-color: #00c6ff; /* Lighter blue */
-   --button-bg: #007bff;
+  --border-color: #00c6ff;
+  --button-bg: #007bff;
   --button-text: white;
-    --image-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    --color: #f0b400;
+  --image-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --color: #f0b400;
+
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.light-mode header,
+body.light-mode footer,
+body.light-mode nav,
+body.light-mode .header,
+body.light-mode .navbar {
+  background-color: var(--header-bg) !important;
+  color: var(--header-text) !important;
 }
 
 body.dark-mode {
