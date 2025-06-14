@@ -12,10 +12,9 @@
   <canvas id="bg-canvas"></canvas>
  <header class="top-nav">
 
-
   <div class="nav-left">
    <button id="theme-toggle">
-  <i id="theme-icon" class="fas fa-sun"></i>
+  <i id="theme-icon" class="fas fa-water"></i>
 </button>
     <img src="assets/profile.jpg" alt="Profile" class="nav-profile-pic" />
     <span class="nav-name">Jhanelle Rafer</span>
@@ -328,52 +327,41 @@
     });
   });
 </script>
-
-<script>
-  const tabs = document.querySelectorAll('.tab');
-  const timelines = document.querySelectorAll('.timeline');
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(btn => btn.classList.remove('active'));
-      tab.classList.add('active');
-
-      timelines.forEach(tl => tl.classList.remove('active'));
-      document.querySelector(`.timeline.${tab.dataset.tab}`).classList.add('active');
-    });
-  });
-</script>
 <script>
 const canvas = document.getElementById("bg-canvas");
 const ctx = canvas.getContext("2d");
 
-let animationType = "none"; // Default state: no animation
+// No animation used anymore
+let animationType = "none";
 let shapes = [];
 
-const themes = ["light", "dark", "gradient"];
+// Themes: added 'green'
+const themes = ["light", "dark", "gradient", "green"];
 const iconMap = {
-  light: "fa-sun",
+  light: "fa-water",
   dark: "fa-moon",
-  gradient: "fa-star"
+  gradient: "fa-star",
+  green: "fa-leaf",
+  sunset: "fa-sunset"
 };
 
 let currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 1 : 0;
 
 function setTheme(index) {
-  document.body.classList.remove("light-mode", "dark-mode", "gradient-mode");
+  document.body.classList.remove("light-mode", "dark-mode", "gradient-mode", "green-mode", "sunset-mode");
   const theme = themes[index];
   document.body.setAttribute("data-theme", theme);
 
   if (theme === "light") {
     document.body.classList.add("light-mode");
-    animationType = "none";
   } else if (theme === "dark") {
     document.body.classList.add("dark-mode");
-    animationType = "none";
   } else if (theme === "gradient") {
     document.body.classList.add("gradient-mode");
-    animationType = "sparkles";
-    createSparkles(); // Recreate sparkles when entering gradient
+  } else if (theme === "green") {
+    document.body.classList.add("green-mode");
+  } else if (theme === "sunset") {
+    document.body.classList.add("sunset-mode");
   }
 
   const themeIcon = document.getElementById("theme-icon");
@@ -381,6 +369,7 @@ function setTheme(index) {
 
   setupCanvas();
 }
+
 
 document.getElementById("theme-toggle").addEventListener("click", () => {
   currentTheme = (currentTheme + 1) % themes.length;
@@ -394,44 +383,7 @@ function setupCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function createSparkles(count = 30) {
-  shapes = Array.from({ length: count }, () => {
-    const size = Math.random() * 30 + 10;
-    return {
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      dx: (Math.random() - 0.5) * 0.4,
-      dy: (Math.random() - 0.5) * 0.4,
-      size,
-      angle: Math.random() * Math.PI,
-      color: `rgba(173, 216, 230, 0.2)` // soft pastel blue
-    };
-  });
-}
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  if (animationType === "sparkles") {
-    shapes.forEach(s => {
-      s.x += s.dx;
-      s.y += s.dy;
-      if (s.x < 0 || s.x > canvas.width) s.dx *= -1;
-      if (s.y < 0 || s.y > canvas.height) s.dy *= -1;
-
-      ctx.save();
-      ctx.translate(s.x, s.y);
-      ctx.rotate(s.angle);
-      ctx.beginPath();
-      ctx.rect(-s.size / 2, -s.size / 2, s.size, s.size);
-      ctx.fillStyle = s.color;
-      ctx.fill();
-      ctx.restore();
-    });
-  }
-
-  requestAnimationFrame(draw);
-}
+// No draw loop anymore
 
 window.addEventListener("resize", setupCanvas);
 window.addEventListener("DOMContentLoaded", () => {
@@ -446,56 +398,8 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   setTheme(currentTheme);
-  draw();
 });
 </script>
-
-<script>
-  const track = document.querySelector('.project-track');
-  const slides = document.querySelectorAll('.project-slide');
-  const prevBtn = document.querySelector('.prev-slide');
-  const nextBtn = document.querySelector('.next-slide');
-
-  let currentIndex = 0;
-
-  function updateSlide() {
-    const width = document.querySelector('.project-slider').offsetWidth;
-    track.style.transform = `translateX(-${currentIndex * width}px)`;
-  }
-
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex < slides.length - 1) {
-      currentIndex++;
-      updateSlide();
-    }
-  });
-
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateSlide();
-    }
-  });
-
-  window.addEventListener('resize', updateSlide);
-  window.addEventListener('DOMContentLoaded', updateSlide);
-// Detect system preference only once
-const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-// If no manual toggle yet and dark mode is preferred
-if (prefersDark) {
-  currentTheme = 1; // set to dark
-} else {
-  currentTheme = 0; // stay in light
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  setTheme(currentTheme);
-  draw();
-});
-
-</script>
-
 
 
 </body>
