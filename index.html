@@ -1,44 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jhanelle Rafer</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jhanelle Rafer</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+  </head>
 <body>
+  <canvas id="bg-canvas"></canvas>
  <header class="top-nav">
 
 
   <div class="nav-left">
-     <button id="theme-toggle" aria-label="Toggle Dark Mode">
-  <i class="fas fa-moon"></i>
+   <button id="theme-toggle">
+  <i id="theme-icon" class="fas fa-sun"></i>
 </button>
     <img src="assets/profile.jpg" alt="Profile" class="nav-profile-pic" />
     <span class="nav-name">Jhanelle Rafer</span>
   </div>
 
-  <div class="hamburger" id="hamburger">&#9776;</div>
+<div class="hamburger" id="hamburger" role="button" aria-label="Open Menu" aria-controls="nav-links">&#9776;</div>
 
-  <nav class="nav-links" id="nav-links">
+<nav class="nav-links" id="nav-links">
   <a href="#about">About</a>
   <a href="#projects">Projects</a>
   <a href="#contact">Contact</a>
 </nav>
+
+
 </header>
 
 
   <aside class="social-bar">
-    <a href="mailto:your_email@gmail.com"><i class="fas fa-envelope"></i></a>
+    <a href="mailto:jhnlrafer@gmail.com"><i class="fas fa-envelope"></i></a>
     <a href="https://linkedin.com/in/jhanelle-rafer-2295a4325"><i class="fab fa-linkedin"></i></a>
     <a href="https://github.com/Nero6577355"><i class="fab fa-github"></i></a>
   </aside>
 
 <section class="hero" id="about">
   <h1 id="typed-heading"><span id="typed-text"></span></h1>
-  <p>A frontend-focused Web Developer passionate about building responsive and intuitive websites that drive results.</p>
-  <a href="#projects" class="cta-button">Projects</a>
+  <p>Design can be art. Design can be aesthetics. Design is so simple, that's why it is so complicated. - Paul Rand </p>
+</section>
+
+<section id="introduction" class="introduction-section">
+  <h2>About Me</h2>
+  <h5>Introduction</h5>
+  <div class="intro-container">
+    <!-- Left: Image -->
+    <div class="intro-image">
+      <img src="assets/introduction.jpg" alt="Jhanelle Rafer">
+    </div>
+
+  <!-- Right: Text -->
+    <div class="intro-text">
+      <p>
+        Even though I’ve already graduated and built several projects, I know there’s still so much more to learn. I enjoy growing, improving my skills, and challenging myself to create better things.
+        I’m someone who believes that every challenge is an opportunity to grow, and every project is a chance to build something better than before. Whether it's debugging a tricky feature, learning a new framework, or collaborating with a team, I approach everything with curiosity and drive. I'm not just building websites, I'm building experiences.
+      </p>
+      <br>
+      <a href="assets/Jhanelle-Rafer-Resume.pdf" class="cta-button" download>
+        <i class="fas fa-download"></i> Download Resume
+      </a>
+    </div>
+  </div>
+ <br> <br> <br>
+ <div class="skills">
+  <h2>Skills</h2>
+  <div class="skill-grid">
+    <div class="skill-item">
+      <img src="https://cdn.iconscout.com/icon/free/png-256/free-html-5-logo-icon-download-in-svg-png-gif-file-formats--programming-langugae-language-pack-logos-icons-1175208.png?f=webp&w=256" alt="HTML">
+      <span>HTML</span>
+    </div>
+    <div class="skill-item">
+      <img src="https://cdn.worldvectorlogo.com/logos/css-3.svg" alt="CSS">
+      <span>CSS</span>
+    </div>
+    <div class="skill-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript">
+      <span>JavaScript</span>
+    </div>
+    <div class="skill-item">
+      <img src="https://static-00.iconduck.com/assets.00/laravel-icon-1990x2048-xawylrh0.png" alt="Laravel">
+      <span>Laravel</span>
+    </div>
+    <div class="skill-item">
+      <img src="https://cdn.freebiesupply.com/logos/large/2x/mysql-5-logo-png-transparent.png" alt="MySQL">
+      <span>MySQL</span>
+    </div>
+
+    <div class="skill-item">
+      <img src="https://cdn.worldvectorlogo.com/logos/laragon.svg" alt="Laragon">
+      <span>Laragon</span>
+    </div>
+
+    <div class="skill-item">
+      <img src="https://static-00.iconduck.com/assets.00/c-sharp-c-icon-912x1024-j3yidw37.png" alt="C#">
+      <span>C#</span>
+    </div>
+    <div class="skill-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/VB.NET_Logo.svg/2048px-VB.NET_Logo.svg.png" alt="VB.NET">
+      <span>VB.NET</span>
+    </div>
+    <div class="skill-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/QGIS_logo_new.svg/2048px-QGIS_logo_new.svg.png" alt="QGIS">
+      <span>QGIS</span>
+    </div>
+  </div>
+</div>
+
+  </div>
+   <br>
+    <br>
+  <br>
+   <br>
+    <br>
+ <section id="qualification" class="qualification-section">
+  <h2>Qualification</h2>
+  <h5>My Journey</h5>
+
+  <div class="qualification-tabs">
+    <button class="tab active" data-tab="experience">Experience</button>
+    <button class="tab" data-tab="education">Education</button>
+    <button class="tab" data-tab="certificate">Certificate</button>
+  </div>
+
+  <div class="timeline-container">
+    <!-- Experience -->
+    <div class="timeline experience active">
+      <div class="timeline-item left">
+        <h3>Intern – Provincial Government of Southern Leyte</h3>
+        <span>Jan - May 2025</span>
+        <p>Worked on QGIS, data encoding, printer troubleshooting, and admin support at Planning and Development Office.</p>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="timeline education">
+      <div class="timeline-item left">
+        <h3>Bachelor of Science in Information Technology</h3>
+        <span>2021 - 2025</span>
+        <p>Graduated at Southern Leyte State University with the Major Programming.</p>
+      </div>
+      <div class="timeline-item right">
+        <h3>Accountancy, Business, and Management</h3>
+        <span>2019 - 2021</span>
+        <p>Graduated Senior High at Matalom National High School.</p>
+      </div>
+    </div>
+     <!-- Certificates -->
+    <div class="timeline certificate">
+      <div class="timeline-item left">
+       <h3>CSC Certificate of Eligibility</h3>
+<span>June 2025</span>
+<p>Passed the Career Service Professional Examination conducted in March 2025.</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
 </section>
 
 <section id="projects">
@@ -53,21 +176,22 @@
     <!-- Left: Contact Info -->
     <div class="contact-info">
       <h3>Call Me</h3>
-      <p>+123 3456 7890</p>
+      <p>+63 955 208 6308</p>
 
       <h3>Email</h3>
-      <p>example@sample.com</p>
+      <p>jhnlrafer@gmail.com</p>
 
       <h3>Location</h3>
-      <p>Philippines</p>
+      <p>Matalom, Leyte, Philippines</p>
     </div>
 
     <!-- Right: Contact Form -->
-    <form id="contact-form" action="https://formspree.io/f/yourFormID" method="POST">
+    <form id="contact-form" action="https://formspree.io/f/xyzjwjzw" method="POST">
       <input type="text" name="name" placeholder="Name" required />
       <input type="email" name="email" placeholder="Email" required />
       <textarea name="message" placeholder="Message" rows="5" required></textarea>
-      <button type="submit">Submit</button>
+     <button type="submit" class="contact-submit-btn">Send Message</button>
+
     </form>
   </div>
 </section>
@@ -172,6 +296,160 @@
     });
   });
 </script>
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const timelines = document.querySelectorAll('.timeline');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(btn => btn.classList.remove('active'));
+      tab.classList.add('active');
+
+      timelines.forEach(tl => tl.classList.remove('active'));
+      document.querySelector(`.timeline.${tab.dataset.tab}`).classList.add('active');
+    });
+  });
+</script>
+<script>
+const canvas = document.getElementById("bg-canvas");
+const ctx = canvas.getContext("2d");
+
+let animationType = "bubbles";
+let shapes = [], bubbles = [];
+
+const themes = ["light", "dark", "gradient"];
+const iconMap = {
+  light: "fa-sun",
+  dark: "fa-moon",
+  gradient: "fa-star"
+};
+let currentTheme = 0;
+
+function setTheme(index) {
+  document.body.classList.remove("dark-mode", "gradient-mode");
+  const theme = themes[index];
+  document.body.setAttribute("data-theme", theme);
+
+  if (theme === "dark") document.body.classList.add("dark-mode");
+  if (theme === "gradient") document.body.classList.add("gradient-mode");
+
+  animationType =
+    theme === "gradient" ? "shapes" :
+    theme === "dark" ? "dust" :
+    "bubbles";
+
+  // Update icon
+  const themeIcon = document.getElementById("theme-icon");
+  themeIcon.className = `fas ${iconMap[theme]}`;
+
+  setupCanvas();
+}
+
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  currentTheme = (currentTheme + 1) % themes.length;
+  setTheme(currentTheme);
+});
+
+function setupCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  if (animationType === "shapes") {
+    createShapes();
+  } else {
+    createBubbles();
+  }
+}
+
+function createBubbles(count = 40) {
+  const isDark = document.body.classList.contains("dark-mode");
+  const baseColor = isDark ? [150, 180, 255] : [0, 123, 255];
+  bubbles = Array.from({ length: count }, () => {
+    const size = Math.random() * 20 + 10;
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: size,
+      speedY: 0.15 + Math.random() * 0.2,
+      opacity: Math.random() * 0.3 + 0.2,
+      color: baseColor,
+    };
+  });
+}
+
+function createShapes(count = 30) {
+  shapes = Array.from({ length: count }, () => {
+    const size = Math.random() * 40 + 10;
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      dx: (Math.random() - 0.5) * 0.4,
+      dy: (Math.random() - 0.5) * 0.4,
+      size,
+      angle: Math.random() * Math.PI,
+    };
+  });
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (animationType === "bubbles") {
+    bubbles.forEach(b => {
+      b.y -= b.speedY;
+      if (b.y + b.radius < 0) {
+        b.y = canvas.height + b.radius;
+        b.x = Math.random() * canvas.width;
+      }
+      const [r, g, bC] = b.color;
+      const gradient = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.radius);
+      gradient.addColorStop(0, `rgba(${r},${g},${bC},${b.opacity})`);
+      gradient.addColorStop(1, `rgba(${r},${g},${bC},0)`);
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+    });
+
+  } else if (animationType === "shapes") {
+    shapes.forEach(s => {
+      s.x += s.dx;
+      s.y += s.dy;
+      if (s.x < 0 || s.x > canvas.width) s.dx *= -1;
+      if (s.y < 0 || s.y > canvas.height) s.dy *= -1;
+      ctx.save();
+      ctx.translate(s.x, s.y);
+      ctx.rotate(s.angle);
+      ctx.beginPath();
+      ctx.rect(-s.size / 2, -s.size / 2, s.size, s.size);
+      ctx.fillStyle = `rgba(255, ${100 + Math.random() * 100}, ${Math.random() * 255}, 0.15)`;
+      ctx.fill();
+      ctx.restore();
+    });
+
+  } else if (animationType === "dust") {
+    bubbles.forEach(b => {
+      b.y -= b.speedY * 0.5;
+      if (b.y + b.radius < 0) {
+        b.y = canvas.height + b.radius;
+        b.x = Math.random() * canvas.width;
+      }
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.radius * 0.3, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180, 200, 255, ${b.opacity * 0.5})`;
+      ctx.fill();
+    });
+  }
+
+  requestAnimationFrame(draw);
+}
+
+window.addEventListener("resize", setupCanvas);
+window.addEventListener("DOMContentLoaded", () => {
+  setTheme(currentTheme);
+  draw();
+});
+</script>
+
 
 
 </body>
