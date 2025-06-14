@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="only light">
     <title>Jhanelle Rafer</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -356,7 +357,10 @@ const iconMap = {
   dark: "fa-moon",
   gradient: "fa-star"
 };
-let currentTheme = 0;
+let currentTheme = window.matchMedia &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches
+  ? 1  // dark mode
+  : 0; // light mode
 
 function setTheme(index) {
   document.body.classList.remove("light-mode", "dark-mode", "gradient-mode");
@@ -365,7 +369,7 @@ function setTheme(index) {
 
   if (theme === "light") {
     document.body.classList.add("light-mode");
-    animationType = "dust";
+    animationType = "none"; // disable animation
   } else if (theme === "dark") {
     document.body.classList.add("dark-mode");
     animationType = "bubbles";
@@ -380,10 +384,13 @@ function setTheme(index) {
   setupCanvas();
 }
 
+
 document.getElementById("theme-toggle").addEventListener("click", () => {
   currentTheme = (currentTheme + 1) % themes.length;
+  localStorage.setItem("theme", currentTheme);
   setTheme(currentTheme);
 });
+
 
 function setupCanvas() {
   canvas.width = window.innerWidth;
@@ -440,10 +447,16 @@ function createSparkles(count = 30) {
 }
 
 function draw() {
+   if (animationType === "none") {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    return requestAnimationFrame(draw);
+  }
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
 
   if (animationType === "dust") {
-    ctx.fillStyle = "rgba(245, 243, 238, 0.03)"; // softer fade for longer trails
+    ctx.fillStyle = "rgba(245, 243, 238, 0.01)"; // softer fade for longer trails
     ctx.fillRect(0, 0, canvas.width, canvas.height); // trail effect
 
     particles.forEach(p => {
@@ -493,9 +506,19 @@ function draw() {
 
 window.addEventListener("resize", setupCanvas);
 window.addEventListener("DOMContentLoaded", () => {
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  if (isMobile && prefersDark) {
+    currentTheme = 1; // dark
+  } else {
+    currentTheme = 0; // light
+  }
+
   setTheme(currentTheme);
   draw();
 });
+
 </script>
 <script>
   const track = document.querySelector('.project-track');
