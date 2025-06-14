@@ -327,6 +327,20 @@
     });
   });
 </script>
+  <script>
+  const tabs = document.querySelectorAll('.tab');
+  const timelines = document.querySelectorAll('.timeline');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(btn => btn.classList.remove('active'));
+      tab.classList.add('active');
+
+      timelines.forEach(tl => tl.classList.remove('active'));
+      document.querySelector(`.timeline.${tab.dataset.tab}`).classList.add('active');
+    });
+  });
+</script>
 <script>
 const canvas = document.getElementById("bg-canvas");
 const ctx = canvas.getContext("2d");
