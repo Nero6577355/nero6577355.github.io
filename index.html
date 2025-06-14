@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="icon" href="assets/logo.png" type="image/png">
   </head>
-<body>
+<body class="light-mode" data-theme="light">
   <canvas id="bg-canvas"></canvas>
  <header class="top-nav">
 
@@ -167,7 +167,39 @@
 <section id="projects">
   <h2>Projects</h2>
   <p>Here are some projects I’ve worked on:</p>
-  <!-- Add project cards or list here -->
+
+  <div class="project-slider">
+    <div class="project-track">
+      <!-- Project 1 -->
+      <div class="project-slide">
+        <div class="project-left">
+          <img src="img/project1.jpg" alt="Project 1" />
+        </div>
+        <div class="project-right">
+          <h3>Project Title 1</h3>
+          <p>Short description of project 1. Technologies used, features, or role.</p>
+          <a href="#" class="view-button" target="_blank">View Project</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-slide">
+        <div class="project-left">
+          <img src="img/project2.jpg" alt="Project 2" />
+        </div>
+        <div class="project-right">
+          <h3>Project Title 2</h3>
+          <p>Short description of project 2. Technologies used, features, or role.</p>
+          <a href="#" class="view-button" target="_blank">View Project</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider-controls">
+    <button class="prev-slide">❮</button>
+    <button class="next-slide">❯</button>
+  </div>
 </section>
 
 <section id="contact">
@@ -310,12 +342,13 @@
     });
   });
 </script>
+
 <script>
 const canvas = document.getElementById("bg-canvas");
 const ctx = canvas.getContext("2d");
 
-let animationType = "bubbles";
-let shapes = [], bubbles = [];
+let animationType = "dust";
+let particles = [], bubbles = [], shapes = [];
 
 const themes = ["light", "dark", "gradient"];
 const iconMap = {
@@ -326,19 +359,21 @@ const iconMap = {
 let currentTheme = 0;
 
 function setTheme(index) {
-  document.body.classList.remove("dark-mode", "gradient-mode");
+  document.body.classList.remove("light-mode", "dark-mode", "gradient-mode");
   const theme = themes[index];
   document.body.setAttribute("data-theme", theme);
 
-  if (theme === "dark") document.body.classList.add("dark-mode");
-  if (theme === "gradient") document.body.classList.add("gradient-mode");
+  if (theme === "light") {
+    document.body.classList.add("light-mode");
+    animationType = "dust";
+  } else if (theme === "dark") {
+    document.body.classList.add("dark-mode");
+    animationType = "bubbles";
+  } else if (theme === "gradient") {
+    document.body.classList.add("gradient-mode");
+    animationType = "sparkles";
+  }
 
-  animationType =
-    theme === "gradient" ? "shapes" :
-    theme === "dark" ? "dust" :
-    "bubbles";
-
-  // Update icon
   const themeIcon = document.getElementById("theme-icon");
   themeIcon.className = `fas ${iconMap[theme]}`;
 
@@ -353,16 +388,29 @@ document.getElementById("theme-toggle").addEventListener("click", () => {
 function setupCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  if (animationType === "shapes") {
-    createShapes();
-  } else {
-    createBubbles();
-  }
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (animationType === "dust") createDust();
+  else if (animationType === "bubbles") createBubbles();
+  else createSparkles();
+}
+
+
+function createDust(count = 100) {
+  particles = Array.from({ length: count }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radius: Math.random() * 2 + 1,
+    dx: (Math.random() - 0.5) * 0.5,
+    dy: (Math.random() - 0.5) * 0.5,
+    opacity: Math.random() * 0.3 + 0.2,
+    trail: `rgba(0, 123, 255,`, // blue with transparency
+  }));
 }
 
 function createBubbles(count = 40) {
   const isDark = document.body.classList.contains("dark-mode");
-  const baseColor = isDark ? [150, 180, 255] : [0, 123, 255];
+  const baseColor = isDark ? [180, 200, 255] : [0, 123, 255];
   bubbles = Array.from({ length: count }, () => {
     const size = Math.random() * 20 + 10;
     return {
@@ -376,9 +424,9 @@ function createBubbles(count = 40) {
   });
 }
 
-function createShapes(count = 30) {
+function createSparkles(count = 30) {
   shapes = Array.from({ length: count }, () => {
-    const size = Math.random() * 40 + 10;
+    const size = Math.random() * 30 + 10;
     return {
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -386,6 +434,7 @@ function createShapes(count = 30) {
       dy: (Math.random() - 0.5) * 0.4,
       size,
       angle: Math.random() * Math.PI,
+      color: `rgba(173, 216, 230, 0.2)` // soft pastel blue, fixed opacity
     };
   });
 }
@@ -393,24 +442,36 @@ function createShapes(count = 30) {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  if (animationType === "bubbles") {
-    bubbles.forEach(b => {
-      b.y -= b.speedY;
-      if (b.y + b.radius < 0) {
-        b.y = canvas.height + b.radius;
-        b.x = Math.random() * canvas.width;
-      }
-      const [r, g, bC] = b.color;
-      const gradient = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.radius);
-      gradient.addColorStop(0, `rgba(${r},${g},${bC},${b.opacity})`);
-      gradient.addColorStop(1, `rgba(${r},${g},${bC},0)`);
+  if (animationType === "dust") {
+    ctx.fillStyle = "rgba(245, 243, 238, 0.03)"; // softer fade for longer trails
+    ctx.fillRect(0, 0, canvas.width, canvas.height); // trail effect
+
+    particles.forEach(p => {
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
       ctx.beginPath();
-      ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
-      ctx.fillStyle = gradient;
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `${p.trail}${p.opacity})`;
       ctx.fill();
     });
-
-  } else if (animationType === "shapes") {
+}
+ else if (animationType === "bubbles") {
+  bubbles.forEach(b => {
+    b.y -= b.speedY;
+    if (b.y + b.radius < 0) {
+      b.y = canvas.height + b.radius;
+      b.x = Math.random() * canvas.width;
+    }
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${b.color[0]},${b.color[1]},${b.color[2]},${b.opacity})`;
+    ctx.fill();
+  });
+}
+ else if (animationType === "sparkles") {
     shapes.forEach(s => {
       s.x += s.dx;
       s.y += s.dy;
@@ -421,22 +482,9 @@ function draw() {
       ctx.rotate(s.angle);
       ctx.beginPath();
       ctx.rect(-s.size / 2, -s.size / 2, s.size, s.size);
-      ctx.fillStyle = `rgba(255, ${100 + Math.random() * 100}, ${Math.random() * 255}, 0.15)`;
+      ctx.fillStyle = s.color;
       ctx.fill();
       ctx.restore();
-    });
-
-  } else if (animationType === "dust") {
-    bubbles.forEach(b => {
-      b.y -= b.speedY * 0.5;
-      if (b.y + b.radius < 0) {
-        b.y = canvas.height + b.radius;
-        b.x = Math.random() * canvas.width;
-      }
-      ctx.beginPath();
-      ctx.arc(b.x, b.y, b.radius * 0.3, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(180, 200, 255, ${b.opacity * 0.5})`;
-      ctx.fill();
     });
   }
 
@@ -448,6 +496,53 @@ window.addEventListener("DOMContentLoaded", () => {
   setTheme(currentTheme);
   draw();
 });
+</script>
+<script>
+  const track = document.querySelector('.project-track');
+  const slides = document.querySelectorAll('.project-slide');
+  const prevBtn = document.querySelector('.prev-slide');
+  const nextBtn = document.querySelector('.next-slide');
+
+  let currentIndex = 0;
+
+  function updateSlide() {
+    const width = document.querySelector('.project-slider').offsetWidth;
+    track.style.transform = `translateX(-${currentIndex * width}px)`;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < slides.length - 1) {
+      currentIndex++;
+      updateSlide();
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateSlide();
+    }
+  });
+
+  window.addEventListener('resize', updateSlide);
+  window.addEventListener('DOMContentLoaded', updateSlide);
+  let currentTheme = 0; // 0 = light, 1 = dark, 2 = gradient
+
+// Detect system preference only once
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+// If no manual toggle yet and dark mode is preferred
+if (prefersDark) {
+  currentTheme = 1; // set to dark
+} else {
+  currentTheme = 0; // stay in light
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTheme(currentTheme);
+  draw();
+});
+
 </script>
 
 
