@@ -59,7 +59,7 @@
         I’m someone who believes that every challenge is an opportunity to grow, and every project is a chance to build something better than before. Whether it's debugging a tricky feature, learning a new framework, or collaborating with a team, I approach everything with curiosity and drive. I'm not just building websites, I'm building experiences.
       </p>
       <br>
-      <a href="assets/resume-jhanelle-rafer.pdf" class="cta-button" download>
+      <a href="assets/Jhanelle-Rafer-Resume.pdf" class="cta-button" download>
         <i class="fas fa-download"></i> Download Resume
       </a>
     </div>
@@ -172,23 +172,34 @@
       <!-- Project 1 -->
       <div class="project-slide">
         <div class="project-left">
-          <img src="img/project1.jpg" alt="Project 1" />
+          <img src="assets/pcmis-web.png" alt="Project 1" />
         </div>
         <div class="project-right">
-          <h3>Project Title 1</h3>
-          <p>Short description of project 1. Technologies used, features, or role.</p>
-          <a href="#" class="view-button" target="_blank">View Project</a>
+          <h5>Parish Church Management Information System (PCMIS)</h5>
+          <p>Web platform for managing parish records, schedules, and member data.</p>
+          <a href="https://ccsit.info/ccsit.info/mis-amsms/public/" class="view-button" target="_blank">View Project</a>
         </div>
       </div>
 
       <!-- Project 2 -->
       <div class="project-slide">
         <div class="project-left">
-          <img src="img/project2.jpg" alt="Project 2" />
+          <img src="assets/pcmis-biometric.png" alt="Project 2" />
         </div>
         <div class="project-right">
-          <h3>Project Title 2</h3>
-          <p>Short description of project 2. Technologies used, features, or role.</p>
+          <h5>Biometric-Based Attendance Tracking</h5>
+          <p>A C# application integrated into the MIS to log and monitor attendance using fingerprint scans using Digital Persona.</p>
+          <a href="#" class="view-button" target="_blank">View Project</a>
+        </div>
+      </div>
+      <!-- Project 3 -->
+      <div class="project-slide">
+        <div class="project-left">
+          <img src="assets/sgrbloom.png" alt="Project 3" />
+        </div>
+        <div class="project-right">
+          <h5>SugarBloom Bakery</h5>
+          <p>A web platform for managing orders and cashier information.</p>
           <a href="#" class="view-button" target="_blank">View Project</a>
         </div>
       </div>
@@ -345,10 +356,12 @@
 const canvas = document.getElementById("bg-canvas");
 const ctx = canvas.getContext("2d");
 
-let animationType = "bubbles"; // Now we're using animation
+// No animation used anymore
+let animationType = "none";
 let shapes = [];
 
-const themes = ["light", "dark", "gradient", "green", "sunset"];
+// Themes: added 'green'
+const themes = ["light", "dark", "gradient", "green","sunset"];
 const iconMap = {
   light: "fa-water",
   dark: "fa-moon",
@@ -359,7 +372,6 @@ const iconMap = {
 
 let currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 1 : 0;
 
-// Set theme class and canvas on theme switch
 function setTheme(index) {
   document.body.classList.remove("light-mode", "dark-mode", "gradient-mode", "green-mode", "sunset-mode");
   const theme = themes[index];
@@ -375,164 +387,30 @@ function setTheme(index) {
     document.body.classList.add("green-mode");
   } else if (theme === "sunset") {
     document.body.classList.add("sunset-mode");
-  }
+  } 
 
   const themeIcon = document.getElementById("theme-icon");
   themeIcon.className = `fas ${iconMap[theme]}`;
 
-  setupCanvas(); // Reset canvas + bubble positions
+  setupCanvas();
 }
 
-// Theme toggle click handler
+
 document.getElementById("theme-toggle").addEventListener("click", () => {
   currentTheme = (currentTheme + 1) % themes.length;
   localStorage.setItem("theme", currentTheme);
   setTheme(currentTheme);
 });
 
-// Setup canvas size and initialize shapes
 function setupCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  shapes = [];
-
-  // Generate bubbles
-  for (let i = 0; i < 35; i++) {
-    shapes.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 4 + 1,
-      dx: (Math.random() - 0.5) * 0.5,
-      dy: (Math.random() - 0.5) * 0.5,
-      opacity: Math.random() * 0.5 + 0.3
-    });
-  }
-}
-let particles = [];
-
-function createParticles(count = 30) {
-  particles = [];
-  const canvasWidth = canvas.width;
-  const canvasHeight = canvas.height;
-
-  for (let i = 0; i < count; i++) {
-    particles.push({
-      x: Math.random() * canvasWidth,
-      y: Math.random() * canvasHeight,
-      dx: (Math.random() - 0.5) * 0.3,
-      dy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 2 + 1.5,
-      opacity: Math.random() * 0.4 + 0.2
-    });
-  }
 }
 
-function getCurrentAccentColor() {
-  const temp = document.createElement("div");
-  temp.style.display = "none";
-  temp.style.color = "var(--accent-color)";
-  document.body.appendChild(temp);
-  const accent = getComputedStyle(temp).color;
-  document.body.removeChild(temp);
-  return accent;
-}
+// No draw loop anymore
 
-function drawParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const color = getCurrentAccentColor();
-
-  for (const p of particles) {
-    p.x += p.dx;
-    p.y += p.dy;
-
-    // Bounce off edges
-    if (p.x <= 0 || p.x >= canvas.width) p.dx *= -1;
-    if (p.y <= 0 || p.y >= canvas.height) p.dy *= -1;
-
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = color.replace("rgb", "rgba").replace(")", `, ${p.opacity})`);
-    ctx.fill();
-  }
-
-  requestAnimationFrame(drawParticles);
-}
-
-function setupCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  createParticles();
-}
-
-// Call animation on theme change too
-function setTheme(index) {
-  document.body.classList.remove("light-mode", "dark-mode", "gradient-mode", "green-mode", "sunset-mode");
-  const theme = themes[index];
-  document.body.setAttribute("data-theme", theme);
-
-  if (theme === "light") {
-    document.body.classList.add("light-mode");
-  } else if (theme === "dark") {
-    document.body.classList.add("dark-mode");
-  } else if (theme === "gradient") {
-    document.body.classList.add("gradient-mode");
-  } else if (theme === "green") {
-    document.body.classList.add("green-mode");
-  } else if (theme === "sunset") {
-    document.body.classList.add("sunset-mode");
-  }
-
-  document.getElementById("theme-icon").className = `fas ${iconMap[theme]}`;
-  
-  setupCanvas(); // Reset canvas + particles
-}
-
-// Draw bubbles based on theme color
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  const rootStyle = getComputedStyle(document.body);
-  const accent = rootStyle.getPropertyValue('--accent-color').trim() || '#ffffff';
-
-  for (let shape of shapes) {
-    ctx.beginPath();
-    ctx.arc(shape.x, shape.y, shape.r, 0, Math.PI * 2);
-    ctx.fillStyle = hexToRGBA(accent, shape.opacity);
-    ctx.fill();
-  }
-}
-
-// Convert HEX to RGBA
-function hexToRGBA(hex, alpha = 1) {
-  hex = hex.replace('#', '');
-  if (hex.length === 3) {
-    hex = hex.split('').map(c => c + c).join('');
-  }
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
-
-// Animate bubbles
-function animate() {
-  draw();
-  for (let shape of shapes) {
-    shape.x += shape.dx;
-    shape.y += shape.dy;
-
-    if (shape.x < 0 || shape.x > canvas.width) shape.dx *= -1;
-    if (shape.y < 0 || shape.y > canvas.height) shape.dy *= -1;
-  }
-  requestAnimationFrame(animate);
-}
-
-// On resize, update canvas
 window.addEventListener("resize", setupCanvas);
-
-// On load, set theme and start animation
 window.addEventListener("DOMContentLoaded", () => {
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -545,10 +423,8 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   setTheme(currentTheme);
-  animate(); // Start animation after theme is set
 });
 </script>
-
 <script>
   const track = document.querySelector('.project-track');
   const slides = document.querySelectorAll('.project-slide');
